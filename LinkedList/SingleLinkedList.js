@@ -1,44 +1,57 @@
 class SingleLinkedList {
 	this.head;
+	this.length = 0;
 	this.next = null;
 
 	constructor(){}
 
 	constructor(val){
+		if (!val) return false;
+
 		this.head = new Node(val);
+		this.length++;
 	}
 
 	insert(val){
+		if (!val) return false;
+
 		if(!this.head){
 			this.head = new Node(val);
+			this.length++;
 			return;
 		}
 
 		var node = this.head;
 		while(node){
-			if(!node.next) node.next = new Node(val);			
+			if(!node.next){
+				node.next = new Node(val);			
+				this.length++;
+			}
 		}
 	}
 
 	delete(){
-		if(!this.head) throw new Error("This list is empty");
+		if(!this.head) return false;
 
 		this.head = this.head.next;
+		this.length--;
 	}
 
 	delete(val){
+		if(!this.head) return false;
+
 		var cur = this.head;
 		var prev = new Node();
 		while(cur){
 			if(cur.val === val){
 				prev.next = cur.next;
+				this.length--;
 				return;
-			}else{
-				prev.next = cur;
-				cur.next = cur.next.next;
 			}
+			prev.next = cur;
+			cur.next = cur.next.next;
 		}
-		throw new Error(val + " not found");
+		return false;
 	}
 
 	display(){
@@ -55,11 +68,14 @@ class SingleLinkedList {
 			if(node.val === val){
 				console.log(node.val);
 				return;
-			} else {
-				node = node.next;
-			}
+			} 
+			node = node.next;
 		}
-		throw new Error(val + " not found");
+		return false;
+	}
+
+	reverse(){
+
 	}
 }
 
