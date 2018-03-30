@@ -1,4 +1,5 @@
-class SingleLinkedList {
+//This class hasn't been examined
+class DoublyLinkedList {	
 	this.head;
 	this.length = 0;
 	this.next = null;
@@ -12,7 +13,22 @@ class SingleLinkedList {
 		this.length++;
 	}
 
-	insert(val){
+	insertAtBeginning(val){
+		if (!val) return false;
+
+		if(!this.head){
+			this.head = new Node(val);
+			this.length++;
+			return;
+		}
+
+		var oldHead = this.head;
+		this.head = new Node(val);
+		this.head.next = oldHead;
+		oldHead.prev = this.head;	
+	}
+
+	insertAtLast(val){
 		if (!val) return false;
 
 		if(!this.head){
@@ -32,7 +48,7 @@ class SingleLinkedList {
 		}
 	}
 
-	delete(){
+	deleteFirst(){
 		if(!this.head) return false;
 
 		this.head = this.head.next;
@@ -47,6 +63,7 @@ class SingleLinkedList {
 		while(cur){
 			if(cur.val === val){
 				prev.next = cur.next;
+				cur.next.prev = prev;
 				this.length--;
 				return;
 			}
@@ -95,6 +112,7 @@ class SingleLinkedList {
 class Node(){
 	this.val;
 	this.next = null;
+	this.prev = null;
 
 	constructor(val){
 		this.val = val;
