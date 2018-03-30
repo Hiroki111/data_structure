@@ -75,7 +75,18 @@ class SingleLinkedList {
 	}
 
 	reverse(){
+		var prev = null;
+		var next = null;
+		var cur = this.head;
 
+		while(cur){
+			next = cur.next;
+			cur.next = prev;
+			prev = cur;
+			cur = next;
+		}
+
+		return prev;
 	}
 }
 
