@@ -12,6 +12,22 @@ class SingleLinkedList {
 		this.length++;
 	}
 
+	[Symbol.iterator]() {
+    	var node  = this.head;
+
+    	return {
+    	  	next: () => ({
+    	  		value: head,
+    	  		done: (head === null) || (head->next === null)
+    	  	})
+    	  	head = head->next;
+    	};
+  	};
+
+	next(){
+
+	}
+
 	insert(val){
 		if (!val) return false;
 
